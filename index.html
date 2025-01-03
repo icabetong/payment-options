@@ -81,7 +81,7 @@
       <h2 class="font-bold text-2xl text-zinc-800 py-4 text-center bg-blue-300/50 rounded-lg">eWallets</h2>
       <ul class="flex items-center justify-center flex-wrap gap-8 my-8">
         <li class="flex items-center justify-center"> 
-          <button type="button" @click="open = true, channel = 'GCash', withAccountNum = true">
+          <button type="button" @click="open = true, channel = 'GCash'">
             <img 
               src="assets/channels/gcash.png" 
               alt="GCash" 
@@ -129,7 +129,7 @@
       
       <div class="relative flex items-end justify-center min-h-screen px-4 text-center md:items-center sm:p-0">
         <!-- Backdrop -->
-        <div x-cloak @click="open = false" x-show="open"
+        <div x-cloak @click="open = false, channel = ''" x-show="open"
           x-transition:enter="transition ease-out duration-300 transform"
           x-transition:enter-start="opacity-0" 
           x-transition:enter-end="opacity-100"
@@ -167,7 +167,7 @@
         <button 
           type="button" 
           class="inline-flex items-center gap-2 rounded-md bg-zinc-700 text-sm text-white font-medium py-1.5 px-3 focus:outline-none hover:bg-zinc-600 focus:outline-1 focus:outline-white" 
-          @click="open = false">
+          @click="open = false, channel = ''">
           Dismiss
         </button>
       </div>
