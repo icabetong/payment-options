@@ -158,7 +158,13 @@
       <div class="my-4">
         <h2 class="mb-4 font-medium">Scan QR</h2>
         <div class="flex flex-col items-center justify-center">
-          <img class="rounded-xl w-[300px] h-[400px]" :src="'assets/qr-code/' + channel.toLowerCase() + '.png'" />
+          <template x-if="channel != ''">
+            <img class="rounded-xl w-[300px] h-[400px]" :src="'assets/qr-code/' + channel.toLowerCase() + '.png'" />
+          </template>
+
+          <template x-if="channel === ''">
+            <div class="rounded-xl w-[300px] h-[400px]"/>
+          </template>
           <p class="mt-2 text-sm text-zinc-800">Open your banking or e-Wallet app to scan the QR Code.</p>
         </div>
       </div>
