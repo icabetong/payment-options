@@ -3,59 +3,174 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" type="image/x-icon" href="public/favicon.ico">
   <title>Payment Options</title>
+  <!-- AlpineJS -->
+  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/focus@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <!-- TailwindCSS and other styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="app.css">
 </head>
-<body class="max-w-screen-2xl mx-auto px-4 py-8 space-y-2 bg-gradient-to-br from-sky-100 to-rose-100">
-  <div class="mb-8">
-    <h1 class="font-bold text-center text-4xl text-zinc-800">Scan to Pay</h1>
-  </div>
+<body x-data="{ open: false, channel: '' }" class="bg-gradient-to-br from-sky-100 to-rose-100">
 
-  <section>
-    <h2 class="font-bold text-2xl text-zinc-800 py-4 text-center bg-blue-300/50 rounded-lg">Traditional & Digital Banks</h2>
-    <ul class="flex items-center justify-center flex-wrap gap-8 my-8">
-      <li class="flex items-center justify-center"> 
-        <img src="assets/bpi.png" alt="bpi qr code" class="rounded-xl drop-shadow" />
-      </li>
-      <li class="flex items-center justify-center">
-        <img src="assets/gotyme.png" alt="gotyme qr code"  class="rounded-xl drop-shadow"/>
-      </li>
-      <li class="flex items-center justify-center">
-        <img src="assets/maybank.png" alt="maybank qr code"  class="rounded-xl drop-shadow"/>
-      </li>
-      <li class="flex items-center justify-center">
-        <img src="assets/pnb.png" alt="pnb qr code"  class="rounded-xl drop-shadow"/>
-      </li>
-      <li class="flex items-center justify-center">
-        <img src="assets/rcbc.png" alt="rcbc qr code"  class="rounded-xl drop-shadow"/>
-      </li>
+  <main class="min-h-screen space-y-2 max-w-screen-2xl mx-auto px-4 py-8">
+    <div class="mb-8 flex flex-col items-center justify-center">
+      <h1 class="font-bold text-center text-4xl text-zinc-800">Scan to Pay</h1>
 
-      <li class="flex items-center justify-center">
-        <img src="assets/seabank.png" alt="seabank qr code"  class="rounded-xl drop-shadow"/>
-      </li>
-    </ul>
-  </section>
+      <p class="mt-4 text-sm text-center bg-emerald-800 p-2 rounded-lg border-2 border-emerald-700 text-emerald-50 font-medium">
+        Click or Tap on the bank&apos;s or e-wallet&apos;s logo to show the QR code
+      </p>
+    </div>
+  
+    <section>
+      <h2 class="font-bold text-2xl text-zinc-800 py-4 text-center bg-blue-300/50 rounded-lg">Banks</h2>
+      <ul class="flex items-center justify-center flex-wrap gap-8 my-8">
+        <li class="flex items-center justify-center"> 
+          <button type="button" @click="open = true, channel = 'BPI'">
+            <img 
+              src="assets/channels/bpi.png" 
+              alt="Bank of the Philippine Islands" 
+              class="rounded-xl h-32 w-64 object-center object-cover transition-all ease-in-out duration-250 hover:drop-shadow-xl" />
+          </button>
+        </li>
+        <li class="flex items-center justify-center">
+          <button type="button" @click="open = true, channel = 'GoTyme'">
+            <img 
+              src="assets/channels/gotyme.png" 
+              alt="GoTyme Bank" 
+              class="rounded-xl h-32 w-64 object-center object-cover transition-all ease-in-out duration-250 hover:drop-shadow-xl" />
+          </button>
+        </li>
+        <li class="flex items-center justify-center">
+          <button type="button" @click="open = true, channel = 'Maybank'">
+            <img 
+              src="assets/channels/maybank.png" 
+              alt="Maybank"
+              class="rounded-xl h-32 w-64 object-center object-cover transition-all ease-in-out duration-250 hover:drop-shadow-xl"/>
+          </button>
+        </li>
+        <li class="flex items-center justify-center">
+          <button type="button" @click="open = true, channel = 'PNB'">
+            <img 
+              src="assets/channels/pnb.png" 
+              alt="Philippine National Bank"
+              class="rounded-xl h-32 w-64 object-center object-cover transition-all ease-in-out duration-250 hover:drop-shadow-xl" />
+          </button>
+        </li>
+        <li class="flex items-center justify-center">
+          <button type="button" @click="open = true, channel = 'RCBC'">
+            <img 
+              src="assets/channels/rcbc.png" 
+              alt="Rizal Commercial Banking Corporation" 
+              class="rounded-xl h-32 w-64 object-center object-cover transition-all ease-in-out duration-250 hover:drop-shadow-xl" />
+          </button>
+        </li>
+        <li class="flex items-center justify-center">
+          <button type="button" @click="open = true, channel = 'SeaBank'">
+            <img 
+              src="assets/channels/seabank.png" 
+              alt="SeaBank" 
+              class="rounded-xl h-32 w-64 object-center object-cover transition-all ease-in-out duration-250 hover:drop-shadow-xl" />
+          </button>
+        </li>
+      </ul>
+    </section>
+  
+    <section>
+      <h2 class="font-bold text-2xl text-zinc-800 py-4 text-center bg-blue-300/50 rounded-lg">eWallets</h2>
+      <ul class="flex items-center justify-center flex-wrap gap-8 my-8">
+        <li class="flex items-center justify-center"> 
+          <button type="button" @click="open = true, channel = 'GCash', withAccountNum = true">
+            <img 
+              src="assets/channels/gcash.png" 
+              alt="GCash" 
+              class="rounded-xl h-32 w-64 object-center object-cover transition-all ease-in-out duration-250 hover:drop-shadow-xl" />
+          </button>
+        </li>
+        <li class="flex items-center justify-center"> 
+          <button type="button" @click="open = true, channel = 'GrabPay'">
+            <img 
+              src="assets/channels/grabpay.png" 
+              alt="GrabPay" 
+              class="rounded-xl h-32 w-64 object-center object-cover transition-all ease-in-out duration-250 hover:drop-shadow-xl" />
+          </button>
+        </li>
+        <li class="flex items-center justify-center">
+          <button type="button" @click="open = true, channel = 'Maya'">
+            <img 
+              src="assets/channels/maya.png" 
+              alt="Maya" 
+              class="rounded-xl h-32 w-64 object-center object-cover transition-all ease-in-out duration-250 hover:drop-shadow-xl" />
+          </button>
+        </li>
+        <li class="flex items-center justify-center">
+          <button type="button" @click="open = true, channel = 'ShopeePay'">
+            <img 
+              src="assets/channels/shopeepay.png" 
+              alt="ShopeePay" 
+              class="rounded-xl h-32 w-64 object-center object-cover transition-all ease-in-out duration-250 hover:drop-shadow-xl" />
+          </button>
+        </li>
+        <li class="flex items-center justify-center">
+          <button type="button" @click="open = true, channel = 'Vybe'">
+            <img 
+              src="assets/channels/vybe.png" 
+              alt="Vybe"
+              class="rounded-xl h-32 w-64 object-center object-cover transition-all ease-in-out duration-250 hover:drop-shadow-xl" />
+          </button>
+        </li>
+      </ul>
+    </section>
+  </main>
 
-  <section>
-    <h2 class="font-bold text-2xl text-zinc-800 py-4 text-center bg-blue-300/50 rounded-lg">eWallets</h2>
-    <ul class="flex items-center justify-center flex-wrap gap-8 my-8">
-      <li class="flex items-center justify-center"> 
-        <img src="assets/gcash.png" alt="gcash qr code"  class="rounded-xl drop-shadow"/>
-      </li>
-      <li class="flex items-center justify-center"> 
-        <img src="assets/grabpay.png" alt="grabpay qr code"  class="rounded-xl drop-shadow"/>
-      </li>
-      <li class="flex items-center justify-center">
-        <img src="assets/maya.png" alt="maya qr code"  class="rounded-xl drop-shadow"/>
-      </li>
-      <li class="flex items-center justify-center">
-        <img src="assets/shopeepay.png" alt="shopeepay qr code"  class="rounded-xl"/>
-      </li>
-      <li class="flex items-center justify-center">
-        <img src="assets/vybe.png" alt="shopeepay qr code"  class="rounded-xl drop-shadow"/>
-      </li>
-    </ul>
-  </section>
+    <!-- Modal -->
+    <div x-show="open" class="fixed inset-0 z-10 overflow-y-auto" role="dialog" aria-labelledby="modal-title" aria-modal="true">
+      
+      <div class="relative flex items-end justify-center min-h-screen px-4 text-center md:items-center sm:p-0">
+        <!-- Backdrop -->
+        <div x-cloak @click="open = false" x-show="open"
+          x-transition:enter="transition ease-out duration-300 transform"
+          x-transition:enter-start="opacity-0" 
+          x-transition:enter-end="opacity-100"
+          x-transition:leave="transition ease-in duration-200 transform"
+          x-transition:leave-start="opacity-100" 
+          x-transition:leave-end="opacity-0"
+          class="fixed inset-0 transition-opacity bg-zinc-600 bg-opacity-40 backdrop-filter backdrop-blur-md 
+          aria-hidden="true">
+          <!-- Modal Backdrop -->
+        </div>
+
+        <!-- Content -->
+      <div x-cloak x-show="open" 
+        x-transition:enter="transition ease-out duration-300 transform"
+        x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95" 
+        x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
+        x-transition:leave="transition ease-in duration-200 transform"
+        x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100" 
+        x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+        class="w-full z-10 rounded-xl max-w-xl bg-white bg-opacity-40 p-6 my-20 backdrop-filter backdrop-blur-2xl overflow-hidden text-left transition-all transform shadow-xl">
+
+      <div class="flex items-center justify-between space-x-4">
+        <h1 class="text-xl text-zinc-900 font-semibold">Pay with&nbsp;<span x-text="channel"/></h1>
+      </div>
+
+      <div class="my-4">
+        <h2 class="mb-4 font-medium">Scan QR</h2>
+        <div class="flex flex-col items-center justify-center">
+          <img class="rounded-xl" :src="'assets/qr-code/' + channel.toLowerCase() + '.png'" />
+          <p class="mt-2 text-sm text-zinc-800">Open your banking or e-Wallet app to scan the QR Code.</p>
+        </div>
+      </div>
+
+      <div class="flex justify-end mt-6">
+        <button 
+          type="button" 
+          class="inline-flex items-center gap-2 rounded-md bg-zinc-700 text-sm text-white font-medium py-1.5 px-3 focus:outline-none hover:bg-zinc-600 focus:outline-1 focus:outline-white" 
+          @click="open = false">
+          Dismiss
+        </button>
+      </div>
+    </div>
 </body>
 </html>
